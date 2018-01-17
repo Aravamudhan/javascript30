@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html en="lang">
+
+<head>
+    <meta charset="utf-8">
+    <title>Console tricks</title>
+</head>
+
+<body>
+    <p onClick="makeGreen()">×BREAK×DOWN×</p>
+    <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+        const p = document.querySelector('p');
+        p.style.color = '#BADA55';
+        p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('I am a regular log message');
+    // Interpolated
+    console.log('Hello, %s','world!');
+    // Styled
+    // 1st argument is a string with %c and the 2nd argument is CSS
+    console.log('%cI am stylish!!!I could be a warning','font-size:20px;color:red;font-weight:700');
+    // warning!
+    console.warn('I am the WARNING!!');
+    // Error :|
+    console.error('Shyt!!!I am an error');
+    // Info
+    console.info('Just don\'t mind me!!!');
+    // Testing
+    console.assert(1===2,'This is soo wrong!!');
+    const p = document.querySelector('p');
+    console.assert(p.classList.contains('.dudeee'),'No class can suffer this name!!');
+    // clearing
+    console.clear();
+    // Viewing DOM Elements
+    console.dir(p);
+    // Grouping together
+    console.clear();
+    dogs.forEach(dog => {
+    	console.groupCollapsed(`${dog.name}`);
+    	console.log(`This is ${dog.name}`);
+    	console.log(`${dog.name} is ${dog.age} years old`);
+    	console.log(`${dog.name} is ${dog.age*7} dog years old`);
+    	console.groupEnd(`${dog.name}`);
+    });
+    console.log();
+    // counting
+    console.count('');
+    // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/aravamudhan')
+    	.then(data => data.json())
+    	.then(data => {
+    			console.timeEnd('fetching data');
+    			console.log(data)
+    		}
+    	);
+    console.table(dogs);
+    </script>
+</body>
+
+</html>
