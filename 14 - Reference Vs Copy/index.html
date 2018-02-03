@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Reference VS Copy</title>
+</head>
+
+<body>
+    <h1 style="color:rgb(13, 190, 235)">Check out the console!!!!!!!!!!</h1>
+    <script>
+        console.log("-----Arrays-----");
+        // start with strings, numbers and booleans
+        // Let's say we have an array
+        const players = ['Shallan', 'Adolin', 'Dalinar', 'Jashna', 'Navani'];
+        // and we want to make a copy of it.
+        const playersCopy = players;
+        console.log("Before players:", players);
+        console.log("Before playersCopy:", playersCopy);
+        // You might think we can just do something like this:
+        console.log("After doing players[players.length - 1] = 'Kaladin'");
+        players[players.length - 1] = 'Kaladin';
+        // We have edited the original array too!
+        // Why? It's because that is an array reference, not an array copy. They both point to the same array!
+        console.log("After players", players);
+        console.log("After playersCopy", playersCopy);
+        // So, how do we fix this? We take a copy instead!
+        // one way
+        console.log("New array by slicing..........");
+        const playersCopy2 = players.slice();
+        playersCopy2[playersCopy2.length - 1] = 'Szeth son vallo';
+        console.log("players", players);
+        console.log("playersCopy2", playersCopy2);
+        // or create a new array and concat the old one in
+        const playersCopy3 = [].concat(players);
+        playersCopy3[playersCopy3.length - 1] = 'Veil';
+        console.log("players", players);
+        console.log("playersCopy3", playersCopy3);
+        // or use the new ES6 Spread
+        const playersCopy4 = [...playersCopy];
+        playersCopy4[playersCopy4.length - 1] = 'Elhokar';
+        console.log("players", players);
+        console.log("playersCopy4", playersCopy4);
+        // now when we update it, the original one isn't changed
+
+        // The same thing goes for objects, let's say we have a person object
+        const person1 = {
+            name: 'Adolin',
+            age: 25
+        };
+        // and think we make a copy:
+        const person2 = person1;
+        console.log("-----Objects-----");
+        console.log("person1", person1);
+        console.log("person1 copied to person2.....");
+        console.log("person2", person2);
+        console.log("After chaging person2.name to Renarin.....")
+        person2.name = 'Renarin';
+        console.log("person1", person1);
+        console.log("person2", person2);
+        // how do we take a copy instead?
+        // Object.assign is shallow.
+        // 1st argument is an empty object or something , 2nd the object you want to copy from, 
+        // 3rd is the set of properties that you want to copy into the copied object
+        console.log("Using Object.assign");
+        const person3 = Object.assign({}, person1, { name: "Shallan", age: 20 });
+        // In the 1st argument, we can give some property too, but it will be overwritten in 3rd
+        // argument object if repeated
+        const person4 = Object.assign({ weapon: 'Shardblade' }, person1, { name: "Adolin", age: 25 });
+        console.log("person1", person1);
+        console.log("person3", person3);
+        console.log("person4", person4);
+        // We will hopefully soon see the object ...spread
+
+        // Things to note - this is only 1 level deep - both for Arrays and Objects. 
+        // lodash has a cloneDeep method, but you should think twice before using it.
+
+    </script>
+
+</body>
+
+</html>
