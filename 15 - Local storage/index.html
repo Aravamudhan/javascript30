@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Local storage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <img class='food-icon' src="food.svg" alt="food image">
+    <div class="wrapper">
+        <h2>The menu</h2>
+        <ul class="plates">
+            <li>Loading the menu...</li>
+        </ul>
+        <form class="add-items">
+            <input type="text" placeholder="Item name" name="item" required>
+            <input type="submit" value="+ Add Item">
+        </form>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        main();
+    }
+</script>
+
+</html>
