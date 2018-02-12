@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mouse Shadow</title>
+</head>
+<body>
+	<div class="mainBlock">
+		<h1 contenteditable>🔥Hola!!!</h1>
+  	</div>
+  	<style>
+  		html {
+    		color:black;
+    		font-family: sans-serif;
+  		}
+  		body {
+    		margin: 0;
+  		}
+  		.mainBlock {
+    		min-height: 100vh;
+    		display:flex;
+    		justify-content: center;
+    		align-items: center;
+    		color:black;
+    		background: #F0FFFF;
+	  	}
+ 	 	h1 {
+    		font-size: 100px;
+  		}
+	</style>
+	<script type="text/javascript">
+		const mainBlock = document.querySelector('.mainBlock');
+		const text = document.querySelector('.mainBlock h1');
+		const shadowDist = 500;
+		function shadow(e){
+			// The position of mouse pointer
+			let {pageX : x,pageY : y} = e;
+			// The width and height of the mainBlock which in our case is the entire screen since
+			// mainBlock takes up that much space
+			let {offsetWidth : width, offsetHeight : height} = mainBlock;
+			// The calculation below decides where the x and y offset values for the text-shadow should be
+			// based on the movement of the mouse
+			let xDist = Math.round((x / width * shadowDist) - (shadowDist / 2));
+			let yDist = Math.round((y / height * shadowDist) - (shadowDist / 2));
+			text.style.textShadow = 
+				`
+					${xDist}px ${yDist}px 0 rgba(255,0,255,0.7),
+      				${xDist * -1}px ${yDist}px 0 rgba(0,255,255,0.7),
+      				${yDist}px ${xDist * -1}px 0 rgba(0,255,0,0.7),
+      				${yDist * -1}px ${xDist}px 0 rgba(0,0,255,0.7)
+				`;
+		}
+		// Trigger an event on mousemove in the block named hero
+		mainBlock.addEventListener('mousemove',shadow);
+	</script>
+</body>
+</html>
