@@ -1,0 +1,15 @@
+{
+    "name": "speech-recognition",
+    "version": "1.0.0",
+    "description": "Playing with the Speech recognition API",
+    "main": "scripts.js",
+    "scripts": {
+      "start": "browser-sync start --directory --server --files \"*.css, *.html, *.js\""
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "browser-sync": "^2.12.5"
+    }
+  }
+  
