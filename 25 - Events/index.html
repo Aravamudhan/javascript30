@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Understanding JavaScript's Capture</title>
+</head>
+
+<body class="bod">
+    <div class="one">
+    	<label>Event bubbling</label>
+        <div class="two">
+            <div class="three">
+            </div>
+        </div>
+    </div>
+    <button class="btn-element">Click me</button>
+    <style>
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+    div {
+        width: 100%;
+        padding: 100px;
+    }
+
+    .one {
+        background: thistle;
+    }
+
+    .two {
+        background: mistyrose;
+    }
+
+    .three {
+        background: coral;
+    }
+    </style>
+    <script>
+    // When we click on a div, say div.three, we also clicked on div.two, div.one since they are the parents of div.three. We also clicked on body, html, the whole window etc. This is called event bubbling.
+    const divs = document.querySelectorAll("div");
+
+    function logText(e) {
+        // Where we click at an element, it is captured and handled there, and then it is bubbled to its parent.
+        console.log("LogText with capture:true:", this.classList.value);
+    }
+
+    function logTextNoPropagation(e) {
+        // It stops bubbling up the event to the parents
+        e.stopPropagation();
+        console.log("LogText with no propagation:", this.classList.value);
+    }
+    function logTextNoPropagationReverse(e) {
+        // It stops bubbling up the event to the parents
+        e.stopPropagation();
+        console.log("LogText with no propagation reversed:", this.classList.value);
+    }
+    // The 3rd argument "capture" triggers the event handler from the top. Say we clicked on div.three, the event will be fired starting from the top most element and completing in the element where it is captured.
+    divs.forEach(div => div.addEventListener("click", logText, { capture: true }));
+    divs.forEach(div => div.addEventListener("click", logTextNoPropagation));
+    let button = document.querySelector(".btn-element");
+    // once: Listens for an event once and after it is performed it unbinds itself
+    button.addEventListener("click",logText,{once:true});
+    </script>
+</body>
+
+</html>
